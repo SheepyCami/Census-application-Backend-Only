@@ -22,4 +22,3 @@ TOKEN_SECRET= <generate a secret>
 
 This is a test commit - my submission for the SRV CA
 Camilla Seeland
-asjdhasjdkhas
