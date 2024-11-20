@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <%- include('partials/header.ejs') %>
+  </head>
+
+  <body class="bg-light">
+    <%- include('partials/navbar.ejs') %>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="card shadow">
+            <div class="card-body">
+              <h1 class="text-center text-primary"><%= title %></h1>
+              <hr />
+              <p class="text-center">
+                Welcome to <strong> <%= title %> </strong>. This version of the
+                application has a user-friendly interface.
+              </p>
+              <p class="text-center">
+                Data is stored in a file for this demonstration.
+              </p>
+              <div class="d-flex justify-content-center mt-4">
+                <a
+                  href="#"
+                  onclick="goToApplication()"
+                  class="btn btn-success me-3"
+                >
+                  Proceed to Application
+                </a>
+                <a href="/auth/login" class="btn btn-primary"> Login </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goToApplication() {
+        fetch("/participants/index", {
+          method: "GET",
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "/participants/index";
+            } else {
+              response.json().then((data) => {
+                alert(`${data.message}\nPlease go to the Login Page`);
+              });
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>

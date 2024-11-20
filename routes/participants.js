@@ -6,6 +6,23 @@ const { Participants, Work, Home, Admin } = require("../models");
 // Apply authentication middleware to all routes
 router.use(isThisAdmin);
 
+router.get("/index", async function (req, res) {
+  try {
+    const participants = await Participants.findAll({
+      include: ["homeDetails", "workDetails"],
+    });
+
+    res.render("participants", {
+      title: "CensusApp",
+      username: req.session.username, // Logged-in admin's username
+      participants: participants, // Pass participants to the EJS template
+    });
+  } catch (err) {
+    console.error("Error fetching participants:", err);
+    res.status(500).send("Failed to load participants.");
+  }
+});
+
 // POST request for adding a participant
 router.post("/add", async (req, res) => {
   const { email, personalInfo, work, home } = req.body;
@@ -13,6 +30,7 @@ router.post("/add", async (req, res) => {
   // Validate the request body
   const validationError = validateParticipant(req.body);
   if (validationError) {
+    console.error("Validation Errors:", validationError); // Log errors
     return res.status(400).json({ error: validationError });
   }
 
@@ -174,9 +192,14 @@ router.delete("/:email", async (req, res) => {
 router.put("/:email", async (req, res) => {
   const { email } = req.params;
 
-  // Validate the request body
-  const validationError = validateParticipant(req.body);
+  // Validate the request body (excluding email validation for update)
+  const validationError = validateParticipant({
+    ...req.body,
+    email: "placeholder@example.com", // Dummy email for validation bypass
+  });
+
   if (validationError) {
+    console.error("Validation Errors:", validationError);
     return res.status(400).json({ error: validationError });
   }
 
@@ -193,26 +216,28 @@ router.put("/:email", async (req, res) => {
       });
     }
 
-    // Update participant and associated models
+    // Update participant's personal information
     await participant.update({
-      firstname: req.body.personalInfo.firstname || participant.firstname,
-      lastname: req.body.personalInfo.lastname || participant.lastname,
-      dob: req.body.personalInfo.dob || participant.dob,
+      firstname: req.body.personalInfo?.firstname || participant.firstname,
+      lastname: req.body.personalInfo?.lastname || participant.lastname,
+      dob: req.body.personalInfo?.dob || participant.dob,
     });
 
-    if (req.body.home) {
+    // Update home details
+    if (req.body.home && participant.homeDetails) {
       await participant.homeDetails.update({
-        country: req.body.home.country || participant.homeDetails.country,
-        city: req.body.home.city || participant.homeDetails.city,
+        country: req.body.home?.country || participant.homeDetails.country,
+        city: req.body.home?.city || participant.homeDetails.city,
       });
     }
 
-    if (req.body.work) {
+    // Update work details
+    if (req.body.work && participant.workDetails) {
       await participant.workDetails.update({
         companyname:
-          req.body.work.companyname || participant.workDetails.companyname,
-        salary: req.body.work.salary || participant.workDetails.salary,
-        currency: req.body.work.currency || participant.workDetails.currency,
+          req.body.work?.companyname || participant.workDetails.companyname,
+        salary: req.body.work?.salary || participant.workDetails.salary,
+        currency: req.body.work?.currency || participant.workDetails.currency,
       });
     }
 

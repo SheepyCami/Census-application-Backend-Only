@@ -8,7 +8,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var authRouter = require("./routes/auth");
+var authRouter = require("./routes/auth"); // Import auth routes
 var participantsRouter = require("./routes/participants");
 
 const db = require("./models");
@@ -37,9 +37,26 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "node_modules/sweetalert2/dist")));
 
+const session = require("express-session");
+
+// Session middleware
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    //cookie: { secure: false },
+    cookie: {
+      secure: false,
+      maxAge: 60 * 60 * 1000, //1 hour
+    },
+  })
+);
+
+// Register routes
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/auth", authRouter);
+app.use("/auth", authRouter); // Register /auth routes
 app.use("/participants", participantsRouter);
 
 // catch 404 and forward to error handler
