@@ -45,4 +45,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Logout route to handle user logout and session destruction
+// Handle logout, I forgot to add logout route:
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: "Failed to destroy session." });
+    }
+    res.redirect("/"); // Redirect to home or login page after logout
+  });
+});
+
 module.exports = router;

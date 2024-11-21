@@ -8,7 +8,7 @@ async function isThisAdmin(req, res, next) {
       return next();
     }
 
-    // Check if credentials are provided in headers (Postman or other API clients)
+    // Check if credentials are provided in headers (for Postman testing or other API clients)
     const username = req.headers.username;
     const password = req.headers.password;
 
