@@ -4,30 +4,18 @@ Remember to create a cloud MySQL service you can use [Aiven.io](https://aiven.io
 
 **Important** - delete your service once you are completed.
 
-#### .env file
-
-Create a .env file with your login credentials from Aiven.io
-
-```js
-HOST = ADMIN_USERNAME = ADMIN_PASSWORD = DATABASE_NAME = DATABASE_PORT = 3306;
-DIALECT = "mysql";
-DIALECTMODEL = "mysql2";
-PORT = "3000";
-```
-
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/khtNd_zz)
-
 ![](http://143.42.108.232/pvt/Noroff-64.png)
 
 # Noroff
 
 ## Back-end Development Year 1
 
-### REST API - Course Assignment 1 <sup>V2</sup>
+### SERVER - Course Assignment 1 <sup>V2</sup>
 
-# myTodo - API
+# CENSUS - APPLICATION
 
-- This application allows users to manage todos with categories and statuses through an API.
+- This application allows an admin to manually manage participants details, and save their data into a cloud database.
+- I have used the free version of [Aiven.io](https://aiven.io), and the free version of https://render.com/
 - Below is the guide on how to install, configure, and use the project.
 
 ## Table of Contents
@@ -37,13 +25,10 @@ PORT = "3000";
 3. Additional Libraries/Packages
 4. NodeJS Version Used
 5. Database Setup
-6. Usage Instructions - Initialize and Sync the Database
-7. Testing with Swagger
-8. Generating a Bearer Token
-9. Testing with Postman
-10. Example Postman Setup:
-11. Testing with Jest
-12. Additional notes and instructions:
+6. Testing with Postman
+7. Example Postman Setup:
+8. Deplyment to Render.com
+9. Additional notes and instructions:
 
 ---
 
@@ -202,14 +187,26 @@ SELECT * FROM defaultdb.Admins;
 
 ## Testing Frontend Application:
 
----
+-Run the program by typing npm start.
+-You should see the following message confirming successful connection to the datbase: "Database connected and syncronized"
+-Enter the following link into your web browser:
+
+```bash
+node
+http://localhost:3000/
+```
+
+-Press the login button and enter the correct admin credentials mentioned earlier.
+-The proceed to application button should not direct you to the application as only the authenticated admin is able to enter.
+-You should receive a Successful login message, and be directed to the Application.
+-Only the authenticated admin can successfully login, as there are no signup page for this application.
+-fill in the form, and press the Add Participant button at the bottom of the page to add a Participant to the cloud database.
+-Once an entry has been made, you can press edit, delete, work details and home details to play around with the details.
+-You will not be able to change the email of a Participant as the email is used for the other functions to work properly, in case you typed it wrong, it's better to delete the Participant and make a new entry.
+
+- ***
 
 ## Testing Backend only with Postman:
-
-1. Similar to Swagger, you can use Postman to test the API endpoints.
-2. Register and log in a user via the /users/signup and /users/login routes.
-3. Copy the token generated during login.
-4. In the Authorization tab of Postman, set the Auth Type to Bearer Token and paste the token.
 
 ---
 
@@ -226,16 +223,31 @@ SELECT * FROM defaultdb.Admins;
 - Body tab: Ensure it's set to **raw** and **JSON.**
 - The following CRUD API endpoints can be tested by using POST, PUT, GET or DELETE:
 
+1. **POST: http://localhost:3000/participants/add:** Route to add a new Participant to the database.
+2. **GET: http://localhost:3000/participants:** Route to get all participants in JSON format from the database.
+3. **GET: http://localhost:3000/participants/details:**Route to get all personal details of participants from the database.
+4. **GET: http://localhost:3000/participants/details/example@example.com:**Route to get a specific Participant's detail by their email.
+   Replace "example@example.com" with the email of the participant saved in the database.
+5. **DELETE: http://localhost:3000/participants/example@example.com**: Route to delete a Participant by their email.
+6. **PUT: http://localhost:3000/participants/example@example.com:**Route to update a participant by their email.
+7. **GET: http://localhost:3000/participants/work/example@example.com:** Route to get participant Work info by their email.
+8. **GET: http://localhost:3000/participants/home/example@example.com:** Route to get Participant home details by their email.
+
+---
+
+## Deployment:
+
+To deploy on Render.com, follow these steps:
+
+Sign in to Render.com and create a new Node.js web service.
+Link your GitHub repository to Render.
+Set the Start Command as npm start.
+Set the Environment Variables (from your .env file).
+Click "Deploy" to deploy the app.
+
 ---
 
 ## Additional notes and instructions:
 
-- Before creating a todo, make sure to create some categories first for your database, as a category ID is required for new todos.
-- Before running a test with Jest, make sure a category have been added to the database as this will result in 2 tests failing without categories.
-- Make sure to sign up a user, before you try to login to generate the token.
-- Always make sure to set to Bearer token before excecuting.
-- **Database Issues:** Verify that your MySQL server is running and that the credentials in the .env file match your MySQL user and database information.
-- Make sure to grant the required priviliges to your admin user in the database.
-- To reset your database, change the line of code back to "true" in the app.js file, and repeat the steps mentioned above.
-- If you encounter any issues, feel free to check the logs for more detailed error messages or refer to the documentation for each package used in this project.
-- Happy testing!
+- Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database.
+- You will not be able to login and enter ANY of the endpoints as they are protected by authorization.
