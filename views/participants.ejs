@@ -121,13 +121,10 @@
         </div>
         <div class="mb-3">
           <label for="country" class="form-label">Country</label>
-          <input
-            type="text"
-            class="form-control"
-            id="country"
-            name="country"
-            required
-          />
+          <select class="form-control" id="country" name="country" required>
+            <!-- Include countries dynamically -->
+            <%- include('partials/countries.ejs') %>
+          </select>
         </div>
         <div class="mb-3">
           <label for="city" class="form-label">City</label>
@@ -351,7 +348,7 @@
               dob: document.getElementById("dob").value,
             },
             home: {
-              country: document.getElementById("country").value,
+              country: document.getElementById("country").value, // Country from the dropdown
               city: document.getElementById("city").value,
             },
             work: {
