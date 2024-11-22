@@ -1,139 +1,155 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-
-  padding-top: 0px;
+  background: url(http://images.restapi.co.za/apps/background2.jpg) #132533
+    no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
 }
 
-a {
-  color: #00b7ff;
+thead {
+  background: rgba(0, 0, 0, 0.7);
+}
+tr,
+td {
+  background: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  border: solid rgb(81, 81, 81) 1px;
 }
 
-#index-main {
-  margin-top: 120px !important;
-  padding-top: 10px;
-  text-align: center;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  width: 50%;
-  margin: auto;
+tr:nth-child(even) {
+  background-color: #8d0808 !important;
 }
 
-#dynamo-main {
-  margin-top: 20px !important;
-  padding-top: 10px;
-
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+tr:hover {
+  background-color: white !important;
 }
 
-#database-entry {
-  border-radius: 5px;
-  padding: 5px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  background-color: #b4eaff !important;
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login-container .login-content {
+  background: rgba(0, 0, 0, 0.4);
+}
+.pos-r {
+  position: relative;
+}
+.login-container .login-header {
+  padding: 10px 30px;
+}
+.login-container,
+.login-container a,
+.login-container input {
+  color: #ffffff;
+}
+.login-container .login-title span {
+  padding: 10px 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-shadow: -1px 1px 1px rgb(17, 42, 51);
 }
 
-/* when edit or delete mark the register form as selected*/
-.database-entry-selected {
-  background-color: #857810 !important;
+.btn-noroff {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #ff7474;
+  --bs-btn-border-color: #ff7474;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #f62b2b;
+  --bs-btn-hover-border-color: #ff7474;
+  --bs-btn-focus-shadow-rgb: 49, 132, 99;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #f62b2b;
+  --bs-btn-active-border-color: #f62f2f;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #ff7474;
+  --bs-btn-disabled-border-color: #4f0101;
 }
 
-#database-entry-form-group {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  background-color: #ffffff !important;
+.login-container .login-title span strong {
+  color: #ff7474;
 }
-
-#database-table tbody tr:hover td {
-  color: #000000 !important;
-  background-color: rgb(30, 237, 30);
-  font-weight: bold;
-  cursor: pointer;
+.login-container .login-body {
+  padding: 30px 30px;
 }
-
-.responsive-table {
-  overflow-y: auto;
-  max-height: 500px;
+.login-container .login-body input.form-control {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  height: 50px;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  border-left: 3px solid transparent;
+  font-size: 16px;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-
-.selected {
-  background-color: rgb(15, 56, 15) !important;
-  color: rgb(254, 22, 22) !important;
-  font-weight: bolder !important;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+.login-container .login-body input.form-control::placeholder {
+  color: rgba(211, 211, 211, 0.513);
 }
-
-#table-header tr th {
-  background-color: #9a8817 !important;
-  color: rgb(5, 6, 2) !important;
+.login-container .login-body input.form-control:focus {
+  border-color: #ff7474;
 }
-
-#navbar {
-  background-color: #9a8817 !important;
-  color: #000000 !important;
-  font-weight: bold !important;
-}
-
-#navbar.nav-item {
-  color: #000000 !important;
-}
-
-.nav-link,
-#name-placeholder {
-  color: #000000 !important;
-  border-radius: 4px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #000000;
-}
-
-.nav-link :hover {
-  background-color: #16042c !important;
-  color: rgb(63, 65, 60) !important;
-  font-weight: bolder !important;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
-
-#username-placeholder {
+.login-container .login-body input.form-control + i {
+  position: absolute;
+  right: 15px;
+  top: 15px;
   font-size: 20px;
-  font-weight: bold;
-  margin: right;
-  color: #cf0909 !important;
+  color: rgb(24, 80, 103);
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.login-container .login-body input.form-control:focus + i {
+  color: #4bccff;
+}
+.login-container .login-body button {
+  height: 50px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  font-size: 20px;
+}
+.login-container .login-footer {
+  padding: 20px 0;
+}
+.template h5 a {
+  color: #ff7474;
 }
 
-#register-operation {
-  background-color: #cfbbe8 !important;
-  color: #000000 !important;
-
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  width: 300px !important;
-  height: 40px !important;
+@media only screen and (max-width: 600px), screen and (max-height: 610px) {
+  .login-container {
+    padding: 0px;
+  }
+  .login-container .login-title span {
+    padding: 0px;
+    margin-bottom: 10px;
+  }
+  .login-container .login-content {
+    background: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .login-header {
+    display: none;
+  }
+  .login-container .login-body {
+    padding: 10px 10px;
+  }
+  .login-container .login-footer {
+    padding: 0;
+  }
 }
-
-.button-group .btn {
-  margin: 0 1px; /* Adjust spacing as needed */
-}
-
-.btn {
-  width: 170px !important;
-  height: 55px !important;
-  margin: 0 1px; /* Adjust spacing as needed */
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-#send-to-form {
-  width: 150px !important;
-  height: 40px !important;
-}
-
-.disable-button {
-  opacity: 0.5;
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
-#email-input {
-  width: 300px !important;
-  height: 40px !important;
-}
-
-.btn {
-  margin: 4px;
+@media only screen and (max-height: 400px) {
+  .login-container {
+    position: static;
+    transform: none;
+    padding: 0;
+  }
 }

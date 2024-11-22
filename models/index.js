@@ -11,15 +11,15 @@ const sequelize = new Sequelize(
   process.env.ADMIN_PASSWORD,
   {
     host: process.env.HOST,
-    port: process.env.DATABASE_PORT,
+    port: process.env.DATABASE_PORT, // Correct the reference here
     dialect: process.env.DIALECT,
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false, // Set to true if strict SSL validation is needed
+        rejectUnauthorized: false, // SSL connection configuration
       },
     },
-    logging: console.log, // Use `false` to disable SQL query logging, or `console.log` to show SQL queries
+    logging: console.log, // Enable SQL query logging (set to false to disable)
   }
 );
 

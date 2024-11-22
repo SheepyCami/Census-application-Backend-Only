@@ -35,11 +35,10 @@ app.use(express.static(path.join(__dirname, "node_modules/jquery/dist")));
 app.use(
   express.static(path.join(__dirname, "node_modules/popper.js/dist/umd"))
 );
-app.use(express.static(path.join(__dirname, "node_modules/sweetalert2/dist")));
 
 const session = require("express-session");
 
-// Session middleware
+// Session middlewaren
 app.use(
   session({
     secret: "keyboard cat",
