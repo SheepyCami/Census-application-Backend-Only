@@ -23,9 +23,9 @@ https://jan24ft-srv-ca-sheepycami.onrender.com/
 2. Environment Variables
 3. Additional Libraries/Packages
 4. NodeJS Version Used
-5. Database Setup
-6. Testing Frontend Application
-7. Testing Backend with Postman - Postman Setup
+5. Database Setup - Restart the Database
+6. Testing Render with the Frontend Application
+7. Testing Backend with Postman - Postman Render Setup
 8. Deplyment to Render.com
 9. Additional notes and instructions:
 
@@ -131,7 +131,7 @@ node -v
 
 ---
 
-## Database Setup
+## Database Setup - Restart the database
 
 This application requires MySQL connected to Aiven.io as the database. You can download MySQL and MySQL Workbench from MySQL's official website
 You can go to the Cloud Database by going to the following link: [Aiven.io](https://aiven.io)
@@ -139,7 +139,7 @@ You can go to the Cloud Database by going to the following link: [Aiven.io](http
 - Conncet to the Cloud Database by following these steps:
 
 1.  Connect successfully to the Aivin Cloud Database by ensuring your .env file is set up correctly with your personal account as mentioned above.
-2.  Initialize and create the Tables by locating the following line in your app.js file:
+2.  In case of errors, you can Initialize and create the Tables by locating the following line in your app.js file:
 
 ```bash
 node
@@ -165,7 +165,8 @@ Start the application by running:
 npm start
 ```
 
-**\*IMPORTANT!:** This line is only use for the first time of running the program. Change back to "false" after the tables have been successfully created and loaded into the database! Once the tables have been loaded, they will be empty, and you need to **create the Admin user yourself!**
+**\*IMPORTANT!:** This line is only for errors the first time you start up the program, or for resetting the database! Change back to "false" after the tables have been successfully created and loaded into the database! Once the tables have been loaded and you do not
+encounter any more errors, they will be empty, and you need to **create the Admin user yourself!**
 
 3.  Run the following SQL command to create an Admin user for the Admin Table.
 
@@ -185,15 +186,13 @@ SELECT * FROM defaultdb.Admins;
 
 ---
 
-## Testing Frontend Application:
+## Testing Render with the Frontend Application:
 
--Run the program by typing npm start.
--You should see the following message confirming successful connection to the database: "Database connected and syncronized"
 -Enter the following link into your web browser:
 
 ```bash
 node
-http://localhost:3000/
+https://jan24ft-srv-ca-sheepycami.onrender.com/
 ```
 
 - Press the login button and enter the correct admin credentials mentioned earlier.
@@ -206,7 +205,7 @@ http://localhost:3000/
 
 - ***
 
-## Testing Backend with Postman - Postman Setup
+## Testing Backend with Postman - Postman Render Setup
 
 - In order to autherize as an admin user, you need to localize the **Headers** and enter the following 3 keys:
 - This application uses basic authentication with headers, please see the isThisAdmin.js file for more information.
@@ -220,17 +219,17 @@ http://localhost:3000/
 - Body tab: Ensure it's set to **raw** and **JSON.**
 - The following CRUD API endpoints can be tested by using POST, PUT, GET or DELETE:
 
-1. **POST: http://localhost:3000/participants/add:** Route to add a new Participant to the database.
-2. **GET: http://localhost:3000/participants:** Route to get all participants in JSON format from the database.
-3. **GET: http://localhost:3000/participants/details:**Route to get all personal details of participants from the database.
-4. **GET: http://localhost:3000/participants/details/example@example.com:**Route to get a specific Participant's detail by their email.
+1. **POST: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/add** Route to add a new Participant to the database.
+2. **GET: https://jan24ft-srv-ca-sheepycami.onrender.com/participants** Route to get all participants in JSON format from the database.
+3. **GET: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/details**Route to get all personal details of participants from the database.
+4. **GET: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/details/example@example.com**Route to get a specific Participant's detail by their email.
    Replace "example@example.com" with the email of the participant saved in the database.
-5. **DELETE: http://localhost:3000/participants/example@example.com**: Route to delete a Participant by their email.
-6. **PUT: http://localhost:3000/participants/example@example.com:**Route to update a participant by their email.
-7. **GET: http://localhost:3000/participants/work/example@example.com:** Route to get participant Work info by their email.
-8. **GET: http://localhost:3000/participants/home/example@example.com:** Route to get Participant home details by their email.
+5. **DELETE: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/example@example.com**: Route to delete a Participant by their email.
+6. **PUT: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/example@example.com**Route to update a participant by their email.
+7. **GET: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/work/example@example.com** Route to get participant Work info by their email.
+8. **GET: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/home/example@example.com** Route to get Participant home details by their email.
 
-- example setup to test the PUT nedpoint: http://localhost:3000/participants/example@example.com:
+- example setup to test the PUT nedpoint: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/example@example.com
 - Write your JSON in the body tab as follows in order to update an participant:
 
 ```bash
@@ -252,7 +251,7 @@ http://localhost:3000/
 }
 ```
 
-- Adding a new Participant example setup: http://localhost:3000/participants/add:
+- Adding a new Participant example setup: https://jan24ft-srv-ca-sheepycami.onrender.com/participants/add:
 
 ```bash
 {
@@ -278,15 +277,9 @@ http://localhost:3000/
 
 ---
 
-## Deployment:
+## Render Deployment:
 
-To deploy on Render.com, follow these steps:
-
-- Sign in to Render.com and create a new Node.js web service.
-- Link your GitHub repository to Render.
-- Set the Start Command as npm start.
-- Set the Environment Variables (from your .env file).
-- Click "Deploy" to deploy the app.
+- The Link to my GitHub repository has been successfully connected to Render.
 
 - Link to my Render:
 
@@ -299,7 +292,7 @@ https://jan24ft-srv-ca-sheepycami.onrender.com/
 ## Additional notes and instructions:
 
 - Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database.
-- an Admin user will not be automatically inserted when starting the project, and you need to create one yourself with SQL commands.
+- an Admin has already been created , in case of errors or restarting the database you need to create one yourself with SQL commands.
 - You will not be able to login and enter ANY of the endpoints as they are protected by authorization.
 - A sample .env file is provied to quide you into setting up your own Aiven account and database.
 - It is very important to specify the correct Aiven parameters, as they are essential for running locally and deploying.

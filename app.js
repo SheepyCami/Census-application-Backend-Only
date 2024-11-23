@@ -15,7 +15,7 @@ const db = require("./models");
 
 var app = express();
 
-// Sync database - change to true or false:
+// Sync database - change to true in case tables do not initialize properly.
 db.sequelize
   .sync({ force: false })
   .then(() => console.log("Database connected and synchronized"))
