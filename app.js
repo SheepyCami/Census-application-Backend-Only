@@ -36,17 +36,18 @@ app.use(
   express.static(path.join(__dirname, "node_modules/popper.js/dist/umd"))
 );
 
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const session = require("express-session");
 
+// Session middlewaren
 app.use(
   session({
     secret: "keyboard cat",
-    store: new SequelizeStore({ db: db.sequelize }), // Use Sequelize as session store
     resave: false,
     saveUninitialized: false,
+    //cookie: { secure: false },
     cookie: {
       secure: false,
-      maxAge: 60 * 60 * 1000, // 1 hour
+      maxAge: 60 * 60 * 1000, //1 hour
     },
   })
 );
