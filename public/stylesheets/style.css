@@ -4,8 +4,7 @@ a {
 }
 
 body {
-  background: url(http://images.restapi.co.za/apps/background2.jpg) #132533
-    no-repeat center center;
+  background: url("/images/background2.jpg") #132533 no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   margin: 0;
