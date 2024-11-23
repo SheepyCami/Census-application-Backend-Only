@@ -1,8 +1,3 @@
-code for Noroff back-end development 1 - SRV CA
-
-Remember to create a cloud MySQL service you can use [Aiven.io](https://aiven.io)
-
-**Important** - delete your service once you are completed.
 
 ![](http://143.42.108.232/pvt/Noroff-64.png)
 
@@ -14,7 +9,7 @@ Remember to create a cloud MySQL service you can use [Aiven.io](https://aiven.io
 
 # CENSUS - APPLICATION
 
-- This application allows an admin to manually manage participants details, and save their data into a cloud database.
+- This application allows an admin to manually manage participants details, and save their data into a MySQL Cloud Database.
 - I have used the free version of [Aiven.io](https://aiven.io), and the free version of https://render.com/
 - Below is the guide on how to install, configure, and use the project.
 
@@ -25,10 +20,10 @@ Remember to create a cloud MySQL service you can use [Aiven.io](https://aiven.io
 3. Additional Libraries/Packages
 4. NodeJS Version Used
 5. Database Setup
-6. Testing with Postman
-7. Example Postman Setup:
-8. Deplyment to Render.com
-9. Additional notes and instructions:
+6. Testing Frontend Application
+6. Testing Backend with Postman - Postman Setup
+7. Deplyment to Render.com
+8. Additional notes and instructions:
 
 ---
 
@@ -69,18 +64,19 @@ Refer to the package.json file for the exact versions of the packages used in th
 
 1. Inside your project directory, create a new .env file (you can use the terminal or file explorer).
 2. Use the provided env_example file as a reference for setting up your environment variables.
-3. The .env file is used to connect to the MySQL cloud database at Aiven.io
-4. Make sure you copy the information exactly in order to connect successfully to Aiven.io
+3. The .env file is used to connect to your MySQL cloud database at Aiven.io
+4. You can create your own MySQL cloud database at (https://aiven.io)
+5. Make sure you copy your Aiven information exactly in order to connect successfully to the database.
 
 Example .env file:
 
 ```bash
 node
-HOST = mysql-16e737af-student-1.b.aivencloud.com
-ADMIN_USERNAME = avnadmin
-ADMIN_PASSWORD = AVNS_8jnBDvuRVokVtxm1rYz
-DATABASE_NAME = defaultdb
-DATABASE_PORT = 15036
+HOST =
+ADMIN_USERNAME =
+ADMIN_PASSWORD =
+DATABASE_NAME =
+DATABASE_PORT =
 DIALECT = "mysql"
 DIALECTMODEL = "mysql2"
 PORT = "3000"
@@ -134,11 +130,11 @@ node -v
 ## Database Setup
 
 This application requires MySQL connected to Aiven.io as the database. You can download MySQL and MySQL Workbench from MySQL's official website
-You can go to the Cloud Database by going to the following link:
+You can go to the Cloud Database by going to the following link: [Aiven.io](https://aiven.io)
 
-- Conncet to the Cloud Database in Workbench by following these steps:
+- Conncet to the Cloud Database by following these steps:
 
-1.  Connect successfully to the Aivin Cloud Database by ensuring your .env file is set up correctly as mentioned above.
+1.  Connect successfully to the Aivin Cloud Database by ensuring your .env file is set up correctly with your personal account as mentioned above.
 2.  Initialize and create the Tables by locating the following line in your app.js file:
 
 ```bash
@@ -165,9 +161,9 @@ Start the application by running:
 npm start
 ```
 
-**\*IMPORTANT!:** This line is only use for the first time of running the program. Change back to "false" after the tables have been successfully created and loaded into the database!
+**\*IMPORTANT!:** This line is only use for the first time of running the program. Change back to "false" after the tables have been successfully created and loaded into the database! Once the tables have been loaded, they will be empty, and you need to **create the Admin user yourself!**
 
-3.  Open MySQL Workbench and run the following SQL commands to create an Admin user for the Admin Table.
+3.  Run the following SQL command to create an Admin user for the Admin Table.
 
 ```bash
 node
@@ -188,7 +184,7 @@ SELECT * FROM defaultdb.Admins;
 ## Testing Frontend Application:
 
 -Run the program by typing npm start.
--You should see the following message confirming successful connection to the datbase: "Database connected and syncronized"
+-You should see the following message confirming successful connection to the database: "Database connected and syncronized"
 -Enter the following link into your web browser:
 
 ```bash
@@ -198,7 +194,7 @@ http://localhost:3000/
 
 -Press the login button and enter the correct admin credentials mentioned earlier.
 -The proceed to application button should not direct you to the application as only the authenticated admin is able to enter.
--You should receive a Successful login message, and be directed to the Application.
+-You should receive a Successful login message, and be directed to the Participants Management Table.
 -Only the authenticated admin can successfully login, as there are no signup page for this application.
 -fill in the form, and press the Add Participant button at the bottom of the page to add a Participant to the cloud database.
 -Once an entry has been made, you can press edit, delete, work details and home details to play around with the details.
@@ -206,13 +202,10 @@ http://localhost:3000/
 
 - ***
 
-## Testing Backend only with Postman:
-
----
-
-## Example Postman Setup:
+## Testing Backend with Postman - Postman Setup
 
 - In order to autherize as an admin user, you need to localize the **Headers** and enter the following 3 keys:
+- This application uses basic authentication with headers, please see the isThisAdmin.js file for more information.
 
 | Key          | Value            |
 | ------------ | ---------------- |
@@ -233,6 +226,52 @@ http://localhost:3000/
 7. **GET: http://localhost:3000/participants/work/example@example.com:** Route to get participant Work info by their email.
 8. **GET: http://localhost:3000/participants/home/example@example.com:** Route to get Participant home details by their email.
 
+- example setup to test the PUT nedpoint: http://localhost:3000/participants/example@example.com:
+- Write your JSON in the body tab as follows in order to update an participant:
+
+```bash
+{
+  "personalInfo": {
+    "firstname": "test",
+    "lastname": "tester",
+    "dob": "1994-02-21"
+  },
+  "home": {
+    "country": "Norway",
+    "city": "Oslo"
+  },
+  "work": {
+    "companyname": "testcompany",
+    "salary": 999,
+    "currency": "NOK"
+  }
+}
+```
+
+- Adding a new Participant example setup: http://localhost:3000/participants/add:
+
+```bash
+{
+  "email": "test2@example.com",
+  "personalInfo": {
+    "firstname": "Test",
+    "lastname": "Tester",
+    "dob": "1977-08-21"
+  },
+  "work": {
+    "companyname": "testcompany",
+    "salary": 153,
+    "currency": "NOK"
+  },
+  "home": {
+    "country": "Norway",
+    "city": "Oslo"
+  }
+}
+```
+
+- The other routes can be tested by simply entering the email of a specific participant from the database.
+
 ---
 
 ## Deployment:
@@ -249,5 +288,7 @@ Click "Deploy" to deploy the app.
 
 ## Additional notes and instructions:
 
-- Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database.
+- Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database. an Admin user will not be automatically inserted when starting the project, and you need to create one yourself with SQL commands.
 - You will not be able to login and enter ANY of the endpoints as they are protected by authorization.
+-A sample .env file is provied to quide you into setting up your own Aiven account and database. 
+-It is very important to specify the correct Aiven parameters, as they are essential for running locally and deploying. 
