@@ -172,12 +172,12 @@ router.delete("/:email", async (req, res) => {
       });
     }
 
-    // Delete the participant
+    // Delete the participant (cascade will handle related Home and Work)
     await participant.destroy();
 
     res.status(200).json({
       status: "success",
-      message: "Participant deleted successfully",
+      message: "Participant and associated details deleted successfully",
     });
   } catch (err) {
     console.error("Error deleting participant:", err);

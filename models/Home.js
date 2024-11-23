@@ -20,6 +20,7 @@ module.exports = (sequelize, Sequelize) => {
     Home.belongsTo(models.Participants, {
       foreignKey: "participantId",
       as: "participant", // Alias for Home -> Participant
+      onDelete: "CASCADE", // Enforce cascading deletes
     });
   };
 

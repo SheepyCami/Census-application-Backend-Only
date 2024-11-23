@@ -71,11 +71,11 @@ Example .env file:
 
 ```bash
 node
-HOST =
-ADMIN_USERNAME =
-ADMIN_PASSWORD =
-DATABASE_NAME =
-DATABASE_PORT =
+HOST = mysql-16e737af-student-1.b.aivencloud.com
+ADMIN_USERNAME = avnadmin
+ADMIN_PASSWORD = AVNS_8jnBDvuRVokVtxm1rYz
+DATABASE_NAME = defaultdb
+DATABASE_PORT = 15036
 DIALECT = "mysql"
 DIALECTMODEL = "mysql2"
 PORT = "3000"
