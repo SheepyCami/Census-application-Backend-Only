@@ -330,18 +330,22 @@ function validateParticipant(data) {
     errors.push("Invalid email format.");
   }
 
-  if (!personalInfo) {
+  if (!personalInfo && !(data.firstname && data.lastname && data.dob)) {
     errors.push("Personal information is required.");
   } else {
-    if (!personalInfo.firstname) {
-      errors.push("First name is required in personalInfo.");
+    const firstname = personalInfo?.firstname || data.firstname;
+    const lastname = personalInfo?.lastname || data.lastname;
+    const dob = personalInfo?.dob || data.dob;
+
+    if (!firstname) {
+      errors.push("First name is required.");
     }
-    if (!personalInfo.lastname) {
-      errors.push("Last name is required in personalInfo.");
+    if (!lastname) {
+      errors.push("Last name is required.");
     }
-    if (!personalInfo.dob) {
-      errors.push("Date of birth (dob) is required in personalInfo.");
-    } else if (!/^\d{4}-\d{2}-\d{2}$/.test(personalInfo.dob)) {
+    if (!dob) {
+      errors.push("Date of birth (dob) is required.");
+    } else if (!/^\d{4}-\d{2}-\d{2}$/.test(dob)) {
       errors.push("DOB must be in YYYY-MM-DD format.");
     }
   }

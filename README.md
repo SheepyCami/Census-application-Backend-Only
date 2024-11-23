@@ -1,4 +1,3 @@
-
 ![](http://143.42.108.232/pvt/Noroff-64.png)
 
 # Noroff
@@ -21,9 +20,9 @@
 4. NodeJS Version Used
 5. Database Setup
 6. Testing Frontend Application
-6. Testing Backend with Postman - Postman Setup
-7. Deplyment to Render.com
-8. Additional notes and instructions:
+7. Testing Backend with Postman - Postman Setup
+8. Deplyment to Render.com
+9. Additional notes and instructions:
 
 ---
 
@@ -192,13 +191,13 @@ node
 http://localhost:3000/
 ```
 
--Press the login button and enter the correct admin credentials mentioned earlier.
--The proceed to application button should not direct you to the application as only the authenticated admin is able to enter.
--You should receive a Successful login message, and be directed to the Participants Management Table.
--Only the authenticated admin can successfully login, as there are no signup page for this application.
--fill in the form, and press the Add Participant button at the bottom of the page to add a Participant to the cloud database.
--Once an entry has been made, you can press edit, delete, work details and home details to play around with the details.
--You will not be able to change the email of a Participant as the email is used for the other functions to work properly, in case you typed it wrong, it's better to delete the Participant and make a new entry.
+- Press the login button and enter the correct admin credentials mentioned earlier.
+- The proceed to application button should not direct you to the application as only the authenticated admin is able to enter.
+- You should receive a Successful login message, and be directed to the Participants Management Table.
+- Only the authenticated admin can successfully login, as there are no signup page for this application.
+- fill in the form, and press the Add Participant button at the bottom of the page to add a Participant to the cloud database.
+- Once an entry has been made, you can press edit, delete, work details and home details to play around with the details.
+- You will not be able to change the email of a Participant as the email is used for the other functions to work properly, in case you typed it wrong, it's better to delete the Participant and make a new entry.
 
 - ***
 
@@ -278,17 +277,20 @@ http://localhost:3000/
 
 To deploy on Render.com, follow these steps:
 
-Sign in to Render.com and create a new Node.js web service.
-Link your GitHub repository to Render.
-Set the Start Command as npm start.
-Set the Environment Variables (from your .env file).
-Click "Deploy" to deploy the app.
+- Sign in to Render.com and create a new Node.js web service.
+- Link your GitHub repository to Render.
+- Set the Start Command as npm start.
+- Set the Environment Variables (from your .env file).
+- Click "Deploy" to deploy the app.
+
+- Link to my Render project:
 
 ---
 
 ## Additional notes and instructions:
 
-- Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database. an Admin user will not be automatically inserted when starting the project, and you need to create one yourself with SQL commands.
+- Before testing the endpoints and functions of the application, both Frontend and Backend versions, make sure an admin user exists in the Admins table in the MySQL cloud database.
+- an Admin user will not be automatically inserted when starting the project, and you need to create one yourself with SQL commands.
 - You will not be able to login and enter ANY of the endpoints as they are protected by authorization.
--A sample .env file is provied to quide you into setting up your own Aiven account and database. 
--It is very important to specify the correct Aiven parameters, as they are essential for running locally and deploying. 
+- A sample .env file is provied to quide you into setting up your own Aiven account and database.
+- It is very important to specify the correct Aiven parameters, as they are essential for running locally and deploying.
