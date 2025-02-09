@@ -141,7 +141,6 @@ You can go to the Cloud Database by going to the following link: [Aiven.io](http
 2.  In case of errors, you can Initialize and create the Tables by locating the following line in your app.js file:
 
 ```bash
-node
 // Sync database
 db.sequelize
   .sync({ force: false })
@@ -170,7 +169,6 @@ encounter any more errors, they will be empty, and you need to **create the Admi
 3.  Run the following SQL command to create an Admin user for the Admin Table.
 
 ```bash
-node
 INSERT INTO Admins (username, password) VALUES ('admin', 'P4ssword');
 ```
 
@@ -179,7 +177,6 @@ INSERT INTO Admins (username, password) VALUES ('admin', 'P4ssword');
 - Confirm the Admin user has been sucesffuly created by running the following command in MySQL:
 
 ```bash
-node
 SELECT * FROM defaultdb.Admins;
 ```
 
@@ -190,7 +187,6 @@ SELECT * FROM defaultdb.Admins;
 -Enter the following link into your web browser:
 
 ```bash
-node
 https://jan24ft-srv-ca-sheepycami.onrender.com/
 ```
 
