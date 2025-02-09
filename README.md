@@ -75,7 +75,6 @@ Refer to the package.json file for the exact versions of the packages used in th
 Example .env file:
 
 ```bash
-node
 HOST = 
 ADMIN_USERNAME = 
 ADMIN_PASSWORD = 
